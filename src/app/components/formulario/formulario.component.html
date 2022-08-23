@@ -1,0 +1,41 @@
+<form (ngSubmit)="submit()" [formGroup]="postagemForm" #formDir="ngForm">
+  <div class="form-group">
+    <label for="title">Título:</label>
+    <input type="text" placeholder="Título ou subtítulo?" formControlName="title" />
+
+    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="validation-error">
+      <div *ngIf="title.errors?.['required']">O título é obrigatório</div>
+      <div *ngIf="title.errors?.['minlength']">
+        O tamanho mínimo do campo é de 4 caracteres
+      </div>
+    </div>
+
+    <div *ngIf="postagemForm.controls['title'].invalid && (postagemForm.controls['title'].dirty || postagemForm.controls['title'].touched)" class="validation-error">
+        <div *ngIf="postagemForm.controls['title'].errors?.['required']">O título é obrigatório</div>
+        <div *ngIf="postagemForm.controls['title'].errors?.['minlength']">
+          O tamanho mínimo do campo é de 4 caracteres
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Descrição:</label>
+    <textarea name="" id="" placeholder="Conta algo aí..." formControlName="description"></textarea>
+    <div *ngIf="description.invalid && formDir.submitted" class="validation-error">
+      A descrição é obrigatória
+    </div>
+
+    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="validation-error">
+      <div *ngIf="description.errors?.['required']">
+        A descrição é obrigatória
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Imagem:</label>
+    <input type="file" (change)="onFileSelected($event)" />
+  </div>
+
+  <input type="submit" [disabled]="formDir.pristine || formDir.invalid" value="Enfiar" />
+</form>

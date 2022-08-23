@@ -1,0 +1,13 @@
+<hr />
+
+<div *ngIf="canShow">
+  <h3>Estamos mostrando isso porque foi permitido</h3>
+</div>
+
+<div *ngIf="name === 'PHIW'; else wrongName">
+  <h3>O nome é PHIW</h3>
+</div>
+
+<ng-template #wrongName>
+  <h3>O nome NÃO é PHIW ({{ name }})</h3>
+</ng-template>
